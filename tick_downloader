@@ -4,6 +4,7 @@ from ibapi.contract import Contract
 from ibapi.ticktype import TickTypeEnum
 from threading import Timer
 import time
+import pandas
 
 
 class TestApp(EWrapper, EClient):
@@ -40,10 +41,14 @@ def main():
     contract.currency = "USD"
     contract.primaryExchange = "NASDAQ"
     
-    app.reqHistoricalTicks(18024, contract,
+    x = app.reqHistoricalTicks(18024, contract,
     "20221111 09:39:33 US/Eastern", "", 10, "BID_ASK", 1, True, [])
-    app.reqHistoricalTicks(18025, contract,
-    "20221111 09:39:33 US/Eastern", "", 10, "TRADES", 1, True, [])
+    print(f'x:{x}')
+    #print(vars)
+    #app.tickByTickAllLast()
+   
+    #app.reqHistoricalTicks(18025, contract,
+    #"20221111 09:39:33 US/Eastern", "", 10, "TRADES", 1, True, [])
     #app.historicalTicks(18005, 10, True)
     #app.historicalTicksBidAsk(18005, 10, True)
 
