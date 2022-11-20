@@ -672,14 +672,17 @@ class EWrapper:
     def historicalTicks(self, reqId: int, ticks: ListOfHistoricalTick, done: bool):
         """returns historical tick data when whatToShow=MIDPOINT"""
         self.logAnswer(current_fn_name(), vars())
+        print(f' historicalTicks: {list(current_fn_name()), vars()}')
 
     def historicalTicksBidAsk(self, reqId: int, ticks: ListOfHistoricalTickBidAsk, done: bool):
         """returns historical tick data when whatToShow=BID_ASK"""
         self.logAnswer(current_fn_name(), vars())
+        print(f'historicalTicksBidAsk: {list(current_fn_name()), vars()}')
 
     def historicalTicksLast(self, reqId: int, ticks: ListOfHistoricalTickLast, done: bool):
         """returns historical tick data when whatToShow=TRADES"""
         self.logAnswer(current_fn_name(), vars())
+        print(f'historicalTicksLast: {current_fn_name(), vars()}')
 
     def tickByTickAllLast(self, reqId: int, tickType: int, time: int, price: float,
                           size: int, tickAttribLast: TickAttribLast, exchange: str,

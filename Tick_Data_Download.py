@@ -1,87 +1,57 @@
 from ibapi.client import EClient
-
 from ibapi.wrapper import EWrapper
-
 from ibapi.contract import Contract
-
- 
-
 import threading
-
+from threading import Timer
 import datetime
-
 import time
 
+symbols = []
+with open('symbols.txt', 'r') as file:
+    for symbol in file:
+        symbols.append(symbol[:-1])
  
 
-class IBapi(EWrapper, EClient):
+class TestApp(EWrapper, EClient):
+    def __init__(self):
+        EClient.__init__(self, self)
 
-                def __init__(self):
+    def stop(self):
+        self.done = True
+        self.disconnect()
 
-                                EClient.__init__(self, self)
 
-                                self.data = [] #Initialize list to store tick data
-
- 
-
-                def historicalData(self, reqId, bar):
-
-                                self.data.append([bar.date, bar.open, bar.high, bar.low, bar.close, bar.volume])
-
-                               
-
-def run_loop():
-
-                app.run()
-
- 
-
-app = IBapi()
-
-app.connect('127.0.0.1', 7497, 123)
-
- 
-
-#Start the socket in a thread
-
-api_thread = threading.Thread(target=run_loop, daemon=True)
-
-api_thread.start()
-
- 
-
-time.sleep(1) #Sleep interval to allow time for connection to server
-
- 
 
 #Create contract object
 
 stock = Contract()
-
-stock.symbol = 'SPY'
-
+stock.symbol = 'C'
 stock.secType = 'STK'
-
 stock.exchange = 'SMART'
-
 stock.currency = "USD"
 
  
 
-queryTime = (datetime.datetime.today() - datetime.timedelta(days=1)).strftime("%Y%m%d %H:%M:%S")
+#queryTime = (datetime.datetime.today() - datetime.timedelta(days=1)).strftime("%Y%m%d %H:%M:%S")
 
+def main():
+    app = TestApp()
+    #app.nextValidID(8029)
+    app.connect('127.0.0.1', 7497, 0)
+
+    time.sleep(2)
+    Timer(3, app.stop).start()
+    #app.start()
+    ret = app.reqHistoricalTicks(18005, stock, 
+    "20221118 09:50:00 US/Eastern", "", 10, "MIDPOINT", 1, True, [])
+    print(f"here's the return value: {ret}")
+    #app.run()
  
 
- 
+if __name__ == '__main__':
+    main()
 
-#Request historical candles
-
- 
-
-app.reqHistoricalData(4102, stock, queryTime,"1 D", "10 mins", "MIDPOINT", 1, 1, False, [])
-
-time.sleep(5) #sleep to allow enough time for data to be returned
-
+""" 
  
 
 #Working with Pandas DataFrames
@@ -98,6 +68,4 @@ df.to_csv('stock.csv')
 
  
 
-print(df)
-
- 
+print(df) """

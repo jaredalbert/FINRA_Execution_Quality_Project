@@ -2717,6 +2717,7 @@ class EClient(object):
             return
             
         self.sendMsg(msg)
+        print(msg)
 
 
     #########################################################################
