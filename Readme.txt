@@ -1,9 +1,12 @@
 '''This is a study to assess the execution quality of FINRA 
 reported trades vs lit-market trades by assessing how far off the NBBO each trade was. 
 
-The study will be 50 low volume issues screened on 11/19/22 with prices between $10 and $50 and daily colume between 5000 and 25000 shares done on market screener
+The study will be 50 low volume issues screened on 11/19/22 with prices between $10 
+and $50 and daily colume between 5000 and 25000 shares done on market screener
 
-Get the trades, NBBO bid ask, and the executing exchange and see how close the FINRA (PFOF, Internalized, Dark Pooreported trades) are to the NBBO vs all the other trades (lit). My hypothese is that FINRA will offer the worst fills.
+Get the trades, NBBO bid ask, and the executing exchange and see how close the 
+FINRA (PFOF, Internalized, Dark Pooreported trades) are to the NBBO vs all the
+ other trades (lit). My hypothese is that FINRA will offer the worst fills.
 
 SYMBOL,COMPANY NAME,PRICE,CHG,CHG %,VOL
 

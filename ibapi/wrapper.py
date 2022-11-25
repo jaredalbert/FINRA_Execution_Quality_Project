@@ -678,7 +678,7 @@ class EWrapper:
         """returns historical tick data when whatToShow=BID_ASK"""
         self.logAnswer(current_fn_name(), vars())
         x = vars().get('ticks')
-        print(x) 
+        print('vars: ', vars())
         import pandas as pd
         y = pd.DataFrame(x)
         y.to_csv('out.csv', mode = 'a')
