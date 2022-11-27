@@ -4,7 +4,8 @@ from ibapi.contract import Contract
 from ibapi.ticktype import TickTypeEnum
 from threading import Timer
 import time
-import pandas
+import pandas as pd
+import pickle
 
 
 class TestApp(EWrapper, EClient):
@@ -43,8 +44,29 @@ def main():
     
     x = app.reqHistoricalTicks(18024, contract,
     "20221111 09:39:33 US/Eastern", "", 10, "BID_ASK", 1, True, [])
-    print(f'x:{x}')
-    #print(vars)
+    #print(f'x:{x}')
+    with open ('vars.pk', 'rb') as f:
+        vars = pickle.load(f) 
+
+    vars_list = list(vars)
+    l = []
+    d={}
+    for item in vars_list:
+        x = str(item).split(',')
+        for field in x:
+            y = list(str(field).split(':'))
+            print (type(y[0]),type(([1])))
+            if y[0] not in d.keys():
+                d[y[0]] = (y[1])
+            else:
+                d[y[0]]+=((y[1]))
+        
+
+                
+    new_d = {k:v.split(' ') for k, v in d.items()}        
+    df = pd.DataFrame.from_dict(new_d, orient = 'columns')
+    df['symbol'] = contract.symbol
+    print (df)
     #app.tickByTickAllLast()
    
     #app.reqHistoricalTicks(18025, contract,
