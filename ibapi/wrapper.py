@@ -678,19 +678,22 @@ class EWrapper:
         """returns historical tick data when whatToShow=BID_ASK"""
         self.logAnswer(current_fn_name(), vars())
         x = vars().get('ticks')
-        #print('vars: ', vars())
-        import pandas as pd
-        y = pd.DataFrame(x)
-        y.to_csv('out.csv', mode = 'a')
         import pickle
-        with open ('vars.pk', 'wb') as f:
+        with open ('bid_ask.pk', 'wb') as f:
             pickle.dump(x,f)
-        
+        #from parse_ticks import parse_ticks
+        #parse_ticks()
 
     def historicalTicksLast(self, reqId: int, ticks: ListOfHistoricalTickLast, done: bool):
         """returns historical tick data when whatToShow=TRADES"""
         self.logAnswer(current_fn_name(), vars())
         print(f'historicalTicksLast: {current_fn_name(), vars()}')
+        x = vars().get('ticks')
+        import pickle
+        with open ('trades.pk', 'wb') as f:
+            pickle.dump(x,f)
+        #from parse_ticks import parse_ticks
+        #parse_ticks()
 
     def tickByTickAllLast(self, reqId: int, tickType: int, time: int, price: float,
                           size: int, tickAttribLast: TickAttribLast, exchange: str,

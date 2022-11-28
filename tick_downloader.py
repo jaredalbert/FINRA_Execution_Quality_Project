@@ -27,16 +27,16 @@ class TestApp(EWrapper, EClient):
     def tickSize(self, reqId, tickType, size):
         print("Tick Size. Ticker Id:", reqId, "tickType:", TickTypeEnum.to_str(tickType), "Size:", size)
 
-contract = Contract()
-contract.symbol = "refr"
+""" contract = Contract()
+contract.symbol = "ibm"
 contract.secType = "STK"
 contract.exchange = "SMART"
 contract.currency = "USD"
-contract.primaryExchange = "NASDAQ"   
+contract.primaryExchange = "NASDAQ"    """
    
             
         
-def tick_downloader():
+def tick_downloader(contract):
     app = TestApp()
 
     app.connect("127.0.0.1", 7497, 0)
@@ -51,6 +51,8 @@ def tick_downloader():
     
     app.reqHistoricalTicks(18028, contract,
     "20221111 09:39:33 US/Eastern", "", 10, "BID_ASK", 1, True, [])
+    app.reqHistoricalTicks(18029, contract,
+    "20221111 09:39:33 US/Eastern", "", 10, "TRADES", 1, True, [])
     #print(f'x:{x}')
     app.run()
 
