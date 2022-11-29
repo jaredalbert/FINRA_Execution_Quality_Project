@@ -687,7 +687,7 @@ class EWrapper:
     def historicalTicksLast(self, reqId: int, ticks: ListOfHistoricalTickLast, done: bool):
         """returns historical tick data when whatToShow=TRADES"""
         self.logAnswer(current_fn_name(), vars())
-        print(f'historicalTicksLast: {current_fn_name(), vars()}')
+        #print(f'historicalTicksLast: {current_fn_name(), vars()}')
         x = vars().get('ticks')
         import pickle
         with open ('trades.pk', 'wb') as f:
