@@ -689,9 +689,11 @@ class EWrapper:
         self.logAnswer(current_fn_name(), vars())
         #print(f'historicalTicksLast: {current_fn_name(), vars()}')
         x = vars().get('ticks')
+        #print(x)
         import pickle
         with open ('trades.pk', 'wb') as f:
             pickle.dump(x,f)
+            
         #from parse_ticks import parse_ticks
         #parse_ticks()
 
@@ -706,6 +708,7 @@ class EWrapper:
                          bidSize: int, askSize: int, tickAttribBidAsk: TickAttribBidAsk):
         """returns tick-by-tick data for tickType = "BidAsk" """
         self.logAnswer(current_fn_name(), vars())
+        
 
     def tickByTickMidPoint(self, reqId: int, time: int, midPoint: float):
         """returns tick-by-tick data for tickType = "MidPoint" """

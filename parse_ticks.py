@@ -29,7 +29,7 @@ def parse_ticks():
     new_d = {k:v.split(' ') for k, v in d.items()}        
     df = pd.DataFrame.from_dict(new_d, orient = 'columns')
     df.to_csv('df_bid_ask.csv')
-    print ('parse_ticks: ', df)
+    #print ('parse_ticks: ', df)
    
     with open ('trades.pk', 'rb') as f:
         vars = pickle.load(f) 
