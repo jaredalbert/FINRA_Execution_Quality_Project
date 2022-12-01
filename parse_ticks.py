@@ -6,7 +6,7 @@ import pickle
 from collections import defaultdict
 import pandas as pd
 
-def parse_ticks():
+def parse_ticks(symbol):
     
     with open ('bid_ask.pk', 'rb') as f:
         vars = pickle.load(f) 
@@ -28,6 +28,7 @@ def parse_ticks():
         
     new_d = {k:v.split(' ') for k, v in d.items()}        
     df = pd.DataFrame.from_dict(new_d, orient = 'columns')
+    df['Symbol'] = symbol
     df.to_csv('df_bid_ask.csv')
     #print ('parse_ticks: ', df)
    
@@ -53,6 +54,7 @@ def parse_ticks():
     new_d = {k:v.split(' ') for k, v in d.items()}  
     new_d.pop(' SpecialConditions', None)     
     df = pd.DataFrame.from_dict(new_d, orient = 'columns')
+    df['Symbol'] = symbol
     df.to_csv('df_trades.csv')
     
     
