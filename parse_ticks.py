@@ -59,5 +59,5 @@ def parse_ticks(symbol):
     
     
 if __name__ == '__main__':
-    parse_ticks()
+    parse_ticks('test')
 
