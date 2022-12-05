@@ -1,3 +1,18 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+
+N = 5
+ind = np.arange(N)
+width = 0.5
+vals = [1,2,3,4,5]
+colors = ['r','b','b','b','b']
+ax.barh(ind, vals, width, color=colors)
+
+plt.show()
+
 import matplotlib.pyplot as plt
  
 #data
