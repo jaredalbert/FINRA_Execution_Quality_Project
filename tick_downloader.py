@@ -36,7 +36,7 @@ contract.primaryExchange = "NASDAQ"   """
    
             
         
-def tick_downloader(contract, num_ticks):
+def tick_downloader(contract, date, num_ticks):
     app = TestApp()
 
     app.connect("127.0.0.1", 7497, 0)
@@ -51,9 +51,9 @@ def tick_downloader(contract, num_ticks):
     
     
     app.reqHistoricalTicks(18028, contract,
-    "20221111 09:39:33 US/Eastern", "", num_ticks, "BID_ASK", 1, True, [])
+    date, "", num_ticks, "BID_ASK", 1, True, [])
     app.reqHistoricalTicks(18029, contract,
-    "20221111 09:39:33 US/Eastern", "", num_ticks, "TRADES", 1, True, [])
+    date, "", num_ticks, "TRADES", 1, True, [])
     #print(f'x:{x}')
     app.run()
 
