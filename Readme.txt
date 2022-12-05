@@ -1,13 +1,37 @@
-'''This is a study to assess the execution quality of FINRA 
-reported trades vs lit-market trades by assessing how far off the NBBO each trade was. 
+’’
+This is a study to assess the execution quality of FINRA reported trades vs lit-market trades by assessing how far off the NBBO each trade was for thin stocks with fairly wide spreads that trade in the tens of dollars--not the hyper liquid names. 
+FINRA reported trades are Payment for Order Flow (PFOF), Internalized, and Dark Pool trades. This study will compare FINRA reported trades’ price improvement to the price improvement offered on all the LIT and ATS markets to assess execution quality. 
+My hypothesis is that PFOF provides dramatically worse prices in illiquid names with fairly large spreads.
+The study uses the first 1000 trades each from 33 low volume issues on 11/15/22. These were chosen with a market screener for prices between $10 and $50 and daily volume between 5000 and 25000 shares. 
+The data comes from Interactive Brokers Python API
+Each trade records the price, the volume of the trade, the NBBO, and the exchange of the trade. 
+The procedure for the study is: 
+1) For each trade find the smallest absolute value of its price difference from the National Nest Bid (NBB) and the National Best Offer (NBO). I used the standard assumption that trades closer to the offer are buys, while those closer to the bid are sells. The absolute value allows me to sum them.
+2) Group the sum of these difference off the NBBO by exchange and sum the total volume grouped by exchange. Divide the sum of the differences by the sum of the total volume by exchange to get the weight per share price improvement off the NBBO for each exchange.
+3) Compare them: We can see from the output table that FINRA reported trades are .0055 worse than NYSE, .024 worse than ISLD and a staggering .056 worse than IEX per share. 
 
-The study uses 1000 trades each from 33 low volume issues screened on 11/19/22 with prices between $10 
-and $50 and daily volume between 5000 and 25000 shares done on market screener
+Exchange	Trade count	Total Volume	improvement_off_NBBO
+AMEX	110	5599	0.064
+DRCTEDGE	987	46701	0.084
+BEX	173	2878	0.093
+BYX	300	6702	0.094
+FINRA	3006	211549	0.105
+NYSE	210	7090	0.110
+PEARL	20	876	0.118
+PSX	39	821	0.121
+BATS	675	14702	0.122
+CHX	56	3036	0.124
+NYSENAT	59	1206	0.124
+ARCA	1102	33934	0.126
+MEMX	244	8701	0.128
+ISLAND	3999	146967	0.128
+IEX	997	41783	0.162
+EDGEA	244	5786	0.167
 
-Get the trades, NBBO bid ask, and the executing exchange and see how close the 
-FINRA (PFOF, Internalized, Dark Pool reported trades) are to the NBBO vs all the
- other trades (lit). My hypothese is that FINRA will offer the worst fills.
 
+
+
+List of symbols used
 SYMBOL,COMPANY NAME,PRICE,CHG,CHG %,VOL
 
 DLHC,DLH Holdings Corp.,$13.30 ,-0.1,-0.75%,6.36K
@@ -46,4 +70,7 @@ HQI,HireQuest Inc.,$16.60 ,1.7,11.41%,19.53K
 HSON,Hudson Global Inc.,$22.38 ,-0.06,-0.25%,13.18K
 HURC,Hurco Cos.,$25.65 ,0.42,1.66%,6.49K
 IESC,IES Holdings Inc.,$33.17 ,0.05,0.15%,9.88K
+
+
+
 '''
