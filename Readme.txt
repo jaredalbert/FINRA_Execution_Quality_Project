@@ -6,7 +6,7 @@ The study uses the first 1000 trades each from 33 low volume issues on 11/15/22.
 The data comes from Interactive Brokers Python API
 Each trade records the price, the volume of the trade, the NBBO, and the exchange of the trade. 
 The procedure for the study is: 
-1) For each trade find the smallest absolute value of its price difference from the National Nest Bid (NBB) and the National Best Offer (NBO). I used the standard assumption that trades closer to the offer are buys, while those closer to the bid are sells. The absolute value allows me to sum them.
+1) For each trade find the smallest absolute value of its price difference from the National Best Bid (NBB) and the National Best Offer (NBO). I used the standard assumption that trades closer to the offer are buys, while those closer to the bid are sells. The absolute value allows me to sum them.
 2) Group the sum of these difference off the NBBO by exchange and sum the total volume grouped by exchange. Divide the sum of the differences by the sum of the total volume by exchange to get the weight per share price improvement off the NBBO for each exchange.
 3) Compare them: We can see from the output table that FINRA reported trades are .0055 worse than NYSE, .024 worse than ISLD and a staggering .056 worse than IEX per share. 
 
